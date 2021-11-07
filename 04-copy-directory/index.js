@@ -1,22 +1,19 @@
 const fs = require('fs');
 const fsPromises = fs.promises;
-
-fsPromises.mkdir(`${__dirname}/files-copy`, {recursive: true});
-
-// async function getFolderFiles(folderName) {
-//   const files = await fsPromise.readdir(folderName, {withFileTypes: true});
-//   console.log(files);
-//   for (const file of files) {
-//     // fs.stat(`./03-files-in-folder/secret-folder/${file.name}`, (err, stats) => {
-//     //   err ? console.log(err) : '';
-//     //   stats.isFile() ?  : '';
-//     // })
-//     console.log(file);
-//   }
-// }
-
-// getFolderFiles(`${__dirname}files/`);
-
-console.log(`${__dirname}/files`);
 const path = require('path');
-console.log(path.join(__dirname, 'files'));
+const srcPath = path.join(__dirname,'files')
+
+const rmMkDir = async () => {
+    await fsPromises.rm(`${srcPath}-copy`, { force: true, recursive: true });
+    await fsPromises.mkdir(`${srcPath}-copy`);
+} 
+
+async function getFolderFiles(folderName) {
+  await rmMkDir();
+  const files = await fsPromises.readdir(folderName, {withFileTypes: true});
+  for (const file of files) {
+  fsPromises.copyFile(path.join(srcPath,file.name),path.join(__dirname,'files-copy', file.name))
+  }
+}
+
+getFolderFiles(srcPath);
