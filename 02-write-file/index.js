@@ -14,6 +14,6 @@ rl.on('line', (inputVal) => {
 });
 
 rl.on('close', () => {
-  process.stdout.write(`\n\nSo here's you wrote:\n\n`);
+  process.stdout.write(`\n\nSo here's what you wrote:\n\n`);
   fs.createReadStream(`${__dirname}/text.txt`,'utf8').on('data', result => process.stdout.write(result));
 });

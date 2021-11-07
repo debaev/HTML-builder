@@ -3,9 +3,8 @@ const fsPromise = require('fs').promises;
 const path = require('path');
 
 async function getFolderFiles(folderName) {
-  const files = await fsPromise.readdir(folderName, {
-    withFileTypes: true
-  });
+  const files = await fsPromise.readdir(folderName, {withFileTypes: true});
+  
   for (const file of files) {
     fs.stat(`./03-files-in-folder/secret-folder/${file.name}`, (err, stats) => {
       err ? console.log(err) : '';
