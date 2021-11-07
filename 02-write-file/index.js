@@ -1,10 +1,12 @@
 const fs = require('fs');
+const path = require('path');
+const filePath = path.join(__dirname, 'text.txt');
 const readline = require('readline');
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 })
-const writeStream = fs.createWriteStream(`${__dirname}/text.txt`);
+const writeStream = fs.createWriteStream(filePath);
 
 process.stdout.write('Write down whatever you want below and once you\'re done press ctrl+c or type "exit" and i\'mma show you what you wrote.\n');
 
@@ -15,5 +17,5 @@ rl.on('line', (inputVal) => {
 
 rl.on('close', () => {
   process.stdout.write(`\n\nSo here's what you wrote:\n\n`);
-  fs.createReadStream(`${__dirname}/text.txt`,'utf8').on('data', result => process.stdout.write(result));
+  fs.createReadStream(filePath,'utf8').on('data', result => process.stdout.write(result));
 });
