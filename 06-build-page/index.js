@@ -51,12 +51,13 @@ const mergeStyles = async () => {
 }
 
 const getFolderFiles = async () => {
-    const folderPath = join(__dirname, 'assets\\');
-    const copyingFolderPath = join(__dirname, 'project-dist\\assets\\');
+    const folderPath = join(__dirname, 'assets', '/');
+    const copyingFolderPath = join(__dirname, 'project-dist','assets', '/');
+    console.log(copyingFolderPath);
     const dirs = await readdir(folderPath);
     for (const dir of dirs) {
-      const dirPath = folderPath + dir + '\\';
-      const copyingDirPath = copyingFolderPath + dir + '\\';
+      const dirPath = folderPath + dir + '/';
+      const copyingDirPath = copyingFolderPath + dir + '/';
       const files = await readdir(dirPath);
       for (const file of files) {
         const filePath = dirPath + file;
