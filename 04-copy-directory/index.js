@@ -4,7 +4,7 @@ const path = require('path');
 const srcPath = path.join(__dirname,'files')
 
 const rmMkDir = async () => {
-    await fsPromises.rm(`${srcPath}-copy`, { force: true, recursive: true });
+    await fsPromises.rmdir(`${srcPath}-copy`, { force: true, recursive: true, maxRetries: 1 });
     await fsPromises.mkdir(`${srcPath}-copy`);
 } 
 
