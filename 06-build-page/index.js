@@ -1,12 +1,12 @@
 const { createWriteStream, readFile } = require('fs');
-const {readdir, appendFile, mkdir, rmdir, writeFile, copyFile } = require('fs').promises;
+const {readdir, appendFile, mkdir, rm, writeFile, copyFile } = require('fs').promises;
 const fsPromise = require('fs').promises;
 const { extname, basename, join } = require('path');
 const distPath = join(__dirname, 'project-dist')
 
 
 const createDirs = async () => {
-  await rmdir(distPath, { force: true, recursive: true, maxRetries: 1 });
+  await rm(distPath, { force: true, recursive: true, maxRetries: 1 });
   await mkdir(distPath);
   await mkdir(join(distPath, 'assets'));
   await mkdir(join(distPath, 'assets', 'fonts'));
